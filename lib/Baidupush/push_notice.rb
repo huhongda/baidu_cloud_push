@@ -4,7 +4,7 @@ require "#{File.dirname(__FILE__)}/base"
 require 'securerandom'
 
 module Baidupush
-  class Api
+  class PushNotice
     # To change this template use File | Settings | File Templates.
 
     HTTP_METHOD_POST = "POST"
@@ -159,10 +159,6 @@ module Baidupush
       push_config
     end
 
-    def push_msg_ios(options={})
-
-    end
-
 
     #"title" : "hello" ,
     #    “description: "hello world"
@@ -184,9 +180,20 @@ module Baidupush
         params.merge!({key.to_s=>value})
       end
       params.merge!("custom_content"=>custom_content)
+      #p "Android_msg: #{params}"
       params
     end
 
+    def get_ios_msg(msg,options={})
+      options = _params_default(options,DEFAULT_IOS_FIELD)
+      if msg.class!=Hash
+        raise RuntimeError,"推送苹果的消息应为Hash"
+      end
+      params = {:aps=>options}
+      msg.each do |key,value|
+        params.merge!(key=>value)
+      end
+    end
 
     #options:
     #method	string	是	方法名，必须存在：push_msg。
@@ -220,6 +227,16 @@ module Baidupush
       options = _params_default(options,DEFAULT_PUSH_CONFIG)
       options[:msg_keys] = Time.now.to_i.to_s + ::SecureRandom.uuid.gsub!("-","")
       options.merge!(:messages => send_andriod_msg)
+      request_server(options)
+    end
+
+
+    #deploy_status: 1:开发 2：生产
+    def push_msg_ios(send_ios_msg,options={})
+      options = _params_default(options,DEFAULT_REQUREST_BAIDU_METHOD)
+      options = _params_default(options,DEFAULT_PUSH_CONFIG)
+      options[:msg_keys] = Time.now.to_i.to_s + ::SecureRandom.uuid.gsub!("-","")
+      options.merge!(:messages => send_ios_msg)
       request_server(options)
     end
 
@@ -268,8 +285,8 @@ module Baidupush
     #类初始值
     DEFAULT_API = {
         :name => "测试应用",
-        :secret_key => "7rWFgwXsECVcIzZ2jz5O9Zcy61CCkh6o",
-        :api_key => "e9s6PNT5aTAwysl2D46c8HM4",
+        :secret_key => "7RmGeGbCmzwfWmrtQKtXb3q28p3IlhH3",
+        :api_key => "GVdWkcfOcAYNODhqWPPooQT6",
         :url => "http://channel.api.duapp.com/rest/2.0/channel/channel",
     }
 
@@ -299,6 +316,14 @@ module Baidupush
         :pkg_content=>"",
         :pkg_name=> "com.baidu.bccsclient",
         :pkg_version=>"0.1",
+    }
+
+
+    #apple的推送消息初始化设置
+    DEFAULT_IOS_FIELD = {
+        :alert=>"Message From Baidu Push",
+        :Sound=>"",
+        :Badge=>0
     }
 
     #推送类型函数的初始化设置

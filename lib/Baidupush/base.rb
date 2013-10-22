@@ -34,9 +34,9 @@ module Baidupush
         str += "#{key}=#{params[key]}"
       end
       str += "#{secertkey}"
-      p "**STR:#{str}"
+      #p "**STR:#{str}"
       str = CGI::escape(str)
-      p "**Str: #{str}"
+      #p "**Str: #{str}"
       sign = Digest::MD5.hexdigest(str)
       sign
     end
@@ -70,7 +70,6 @@ module Baidupush
     def self.http_get(url,args)
       uri = URI.parse(url)
       uri.query = URI.encode_www_form(args)
-      p "URL : #{uri}"
       http = Net::HTTP.new(uri.host, uri.port)
       request = Net::HTTP::Get.new(uri.request_uri)
       time_start = Time.now.to_i

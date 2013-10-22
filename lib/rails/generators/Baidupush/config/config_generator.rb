@@ -6,7 +6,7 @@ module Baidupush
     class ConfigGenerator < Rails::Generators::Base
       desc "Creates a baidu_cloud_push configuration file at config/baidu_push.yml"
 
-      def create_config_file
+      def self.create_config_file
         template 'baidu_cloud_push.yml', File.join('config', 'baidu_cloud_push.yml')
       end
 
