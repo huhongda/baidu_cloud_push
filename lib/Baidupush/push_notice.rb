@@ -101,7 +101,7 @@ module Baidupush
 
 
     #服务端删除用户标签。特别地，当user_id被提交时，服务端将只会完成解除该用户与tag绑定关系的操作。
-    # Arguments:
+    #Arguments:
     #  method:	(String)	是	方法名，必须存在：delete_tag。
     #  apikey:	(String)	是	访问令牌，明文AK，可从此值获得App的信息，配合sign中的sk做合法性身份认证。
     #  tag:	(String)	是	标签名，最长128字节。
