@@ -24,7 +24,8 @@ Or install it yourself as:
 TODO: Write usage instructions here
 
 导入配置文件：
-    $ rails generate baidupush:config
+
+    rails generate baidupush:config
 
 使用例子：
 
