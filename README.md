@@ -16,9 +16,17 @@ Or install it yourself as:
 
     $ gem install Baidupush
 
+
+
+
 ## Usage
 
 TODO: Write usage instructions here
+
+导入配置文件：
+    rails generate baidupush:config
+
+使用例子：
 
 ## Contributing
 
