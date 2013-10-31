@@ -3,7 +3,7 @@
 module Baidupush
   # Your code goes here...
   module Generators
-    class BaiDuConfigGenerator < ::Rails::Generators::Base
+    class ConfigGenerator < ::Rails::Generators::Base
       desc "Creates a baidu_cloud_push configuration file at config/baidu_push.yml"
 
       def self.create_config_file
