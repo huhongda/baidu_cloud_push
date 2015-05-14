@@ -273,10 +273,10 @@ module Baidupush
 
 
     #初始化options
-    def _params_default(options,_default)
+    def _params_default(options, _default)
       _default.keys.each do |key|
-        options[key] = options[key.to_s]||options[key]
-        options[key] = options[key]||_default[key]
+        options[key] = options[key.to_s] || options[key]
+        options[key] = options[key] || _default[key]
       end
       options
     end

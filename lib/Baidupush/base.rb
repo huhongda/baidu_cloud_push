@@ -17,7 +17,7 @@ module Baidupush
     #   => {"name"=>"测试推送","secret_key"=>"","api_key"=>""}
     def self.load_config
       path = Rails.root.join("config",'baidu_cloud_push.yml')
-      config = YAML.load(path)
+      config = YAML.load_file(path)
       DEFAULT_CONFIG.keys.each do |key|
         unless config[key.to_s]
           raise BaseError.new(BaseError.missing_parameters,"缺少参数：#{key.to_s}")
