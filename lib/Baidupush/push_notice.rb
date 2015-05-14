@@ -10,9 +10,9 @@ module Baidupush
     HTTP_METHOD_POST = "POST"
     HTTP_METHOD_GET = "GET"
 
-    def initialize(options={})
-      options = YAML.load(File.expand_path('../config/baidu_cloud_push.yml', __FILE__)) unless options&&!File.exist?(File.expand_path('../config/baidu_cloud_push.yml', __FILE__))
-      @options = _params_default(options,DEFAULT_API)
+    def initialize(options = {})
+      options = YAML.load_file(File.expand_path('../config/baidu_cloud_push.yml', __FILE__)) unless options.empty? && !File.exist?(File.expand_path('../config/baidu_cloud_push.yml', __FILE__))
+      @options = _params_default(options, DEFAULT_API)
     end
 
     #获取secretkey
